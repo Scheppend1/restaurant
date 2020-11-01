@@ -1,0 +1,120 @@
+<!-- Filter Datatable Options Starts -->
+<section id="extended">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-block">
+                        <div class="row akhil">
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <select id="projectinput5" class="form-control" id="getpage" (change)="getrecord()">
+                                        <option value="10"  selected>10</option>
+                                        <option value="10000">All</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <a class="btn btn-raised mr-1 btn-primary" (click)="exportAsXLSX()">Download List</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h4 class="card-title">Rejected Orders</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-block">
+                        <table class="table table-responsive-md text-left">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No.</th>
+                                    <th>Table Id</th>
+                                    <th>Order Amount</th>
+                                    <th>Customer Detail</th>
+                                    <th>Order Date</th>
+                                    <th>Item Info</th>
+                                    <!--<th>Status</th>-->
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let product of TodaySolddata; index as i">
+                                    <td>{{itemsPerPage *(currentPage-1)+i+1}}</td>
+                                    <td>{{product.name}}</td>
+                                    <td>{{product.total_amount}}</td>
+                                    <td>{{product.custno}}</td>
+                                    <input type="hidden" id="restid" value="{{product.restaurant_id}}"/>
+                                    <input type="hidden" id="tabid" value="{{product.table_id}}"/>
+                                    <td>{{product.created_date | date:'dd/MM/yyyy h:mm:ss a'}}</td>
+                                    <td>
+                                        <button class="btn btn-raised mr-1 btn-info" (click)="open(content,product.id)">Detail</button>
+                                    </td>
+                                    <td id="statusreport" *ngIf="product.status == 1" >
+                                        <button class="btn btn-raised mr-1 btn-success" value="2" (click)="changestatus('2')">Accept</button>
+                                        <button class="btn btn-raised mr-1 btn-danger" value="4" (click)="changestatus('4')">Reject</button>
+                                    </td>
+                                    <td id="statusreport" *ngIf="product.status == 2">
+                                        <button class="btn btn-raised mr-1 btn-primary" value="3" (click)="changestatus('3')">Close order</button>
+                                    </td>
+                                    <!--<td id="statusreport" *ngIf="product.status == 3">Close</td>
+                                    <td id="statusreport" *ngIf="product.status == 4">Reject</td>-->
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="totalRecords !== ''">
+                    <div class="card-block">
+                        <ngb-pagination (pageChange)="handleChange($event)" [collectionSize]="totalRecords" [(page)]="initialPageValue" [maxSize]="5" [rotate]="true" [pageSize]="10" [boundaryLinks]="true"></ngb-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="card-block">
+            <ng-template #content let-c="close" let-d="dismiss">
+                <div class="modal-header">
+                    <h4 class="modal-title">Item Info</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--<p>One fine body&hellip;</p>-->
+                    <div class="card-body">
+                        <div class="card-block">
+                            <table class="table table-responsive-md text-left">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let item of itemifo; index as i">
+                                        <td>{{i+1}}</td>
+                                        <td>{{item.name}}</td>
+                                        <td>{{item.quantity}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!--<button  type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="changestatus()"> <i class="fa fa-check-square-o"></i>Save</button>-->
+                    <button type="button" class="btn btn-secondary btn-raised" (click)="c('Close click')">Close</button>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</section>
+<!-- Filter Datatable Options Ends -->

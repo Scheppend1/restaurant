@@ -1,0 +1,163 @@
+<!-- Basic form layout section start -->
+<section id="basic-form-layouts">
+    <div class="row text-left">
+        <div class="col-sm-12">
+            <div class="content-header">Menu Form</div>
+        </div>
+    </div>
+    <div class="row text-left">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="px-3">
+                        <form [formGroup]="ProductForm"  novalidate>
+                            <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Menu Info</h4>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Name <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter product name" class="form-control" formControlName="name" required name>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('name').errors && (ProductForm.get('name').touched || ProductForm.get('name').dirty)">
+                                                    <span *ngIf="ProductForm.get('name').errors.required">Name is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Cost <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Cost" class="form-control" formControlName="cost" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('cost').errors && (ProductForm.get('cost').touched || ProductForm.get('cost').dirty)">
+                                                    <span *ngIf="ProductForm.get('cost').errors.required">Cost is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Food Type <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="projectinput5" formControlName="cat_id"  (changess)="getsubcategory($event.target.value)" class="form-control">
+                                                    <option value="" selected="" disabled="">Select Type</option>
+                                                    <option *ngFor="let category of categorydata"  value="{{category.id}}">{{ category.name}}</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('cat_id').errors && (ProductForm.get('cat_id').touched || ProductForm.get('cat_id').dirty)">
+                                                    <span *ngIf="ProductForm.get('cat_id').errors.required">Category required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Description <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter description" class="form-control" formControlName="description" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('description').errors && (ProductForm.get('description').touched || ProductForm.get('description').dirty)">
+                                                    <span *ngIf="ProductForm.get('description').errors.required">Description is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Tags <em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Enter Tags" class="form-control" formControlName="tags" required>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('tags').errors && (ProductForm.get('tags').touched || ProductForm.get('tags').dirty)">
+                                                    <span *ngIf="ProductForm.get('tags').errors.required">Tags is required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">Is Veg<em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="" formControlName="is_veg"  class="form-control">
+                                                    <option value="" selected="" disabled="" >Select Veg Type</option>
+                                                    <option value="1" >Yes</option>
+                                                    <option value="2" >No</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('is_veg').errors && (ProductForm.get('is_veg').touched || ProductForm.get('is_veg').dirty)">
+                                                    <span *ngIf="ProductForm.get('is_veg').errors.required">Veg required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    
+                                    <div class="col-md-6">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="projectinput1">In Stock<em class="error">*</em></label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <select id="" formControlName="in_stock"  class="form-control">
+                                                    <option value="" selected="" disabled="" >Select Stock</option>
+                                                    <option value="1" >In Stock</option>
+                                                    <option value="2" >Out Of Stock</option>
+                                                </select>
+                                                <span class="form-text text-muted danger"
+                                                    *ngIf="ProductForm.get('in_stock').errors && (ProductForm.get('in_stock').touched || ProductForm.get('in_stock').dirty)">
+                                                    <span *ngIf="ProductForm.get('in_stock').errors.required">Stock required</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-actions center">
+                                <button type="button" class="btn btn-raised btn-raised btn-warning mr-1" (click)="Gotolist()">
+                                    <i class="ft-x"></i> Cancel
+                                </button>
+                                <button *ngIf="showbutton" type="submit" class="btn btn-raised btn-raised btn-primary" (click)="editproduct()"> <i class="fa fa-check-square-o"></i>Submit</button>
+                                <button *ngIf="!showbutton" type="submit"  class="btn btn-raised btn-raised btn-primary" (click)="createproduct()"> <i class="fa fa-check-square-o"></i>Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
